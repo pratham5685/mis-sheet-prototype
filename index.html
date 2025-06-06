@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OMOTEC - Employee Task Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for the table */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 8px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1; /* slate-300 */
+            border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col antialiased">
+
+    <header class="bg-white shadow-sm px-6 py-4 flex flex-col sm:flex-row items-center justify-between sticky top-0 z-10">
+        <div class="flex items-center space-x-4 mb-3 sm:mb-0">
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">OMOTEC</h1>
+            <div class="hidden sm:flex items-center space-x-6 text-gray-600 text-sm border-l border-gray-200 pl-6">
+                <div><span class="font-semibold text-gray-800">Employee:</span> Pratham Chavan</div>
+                <div><span class="font-semibold text-gray-800">Code:</span> E12345</div>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6">
+            <div class="flex items-center space-x-2">
+                <label for="monthFilter" class="text-gray-700 text-sm font-medium">Filter by:</label>
+                <select id="monthFilter" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out pr-8">
+                    <option value="all">All Months</option>
+                    <option value="Jan">January</option>
+                    <option value="Feb">February</option>
+                    <option value="Mar">March</option>
+                    <option value="Apr">April</option>
+                    <option value="May">May</option>
+                    <option value="Jun">June</option>
+                    <option value="Jul">July</option>
+                    <option value="Aug">August</option>
+                    <option value="Sep">September</option>
+                    <option value="Oct">October</option>
+                    <option value="Nov">November</option>
+                    <option value="Dec">December</option>
+                </select>
+            </div>
+
+            <div class="text-gray-700 text-sm">
+                <span class="font-semibold text-gray-800">Managed by:</span> Sheetal Gandhi
+            </div>
+
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md shadow-sm transition duration-200 ease-in-out text-sm">
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-gray-700 border-collapse">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">Sr. No.</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">Week</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">Day</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">Date</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">09:00–10:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">10:00–11:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">11:00–12:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">12:00–13:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">13:00–14:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">14:00–15:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">15:00–16:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">16:00–17:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">17:00–18:00</th>
+                            <th class="border border-gray-200 px-4 py-3 text-left font-semibold text-gray-800 whitespace-nowrap">18:00–19:00</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-month="Jan" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">1</td><td class="border border-gray-200 px-4 py-2">Week 1</td><td class="border border-gray-200 px-4 py-2">Wed</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">01/Jan/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Task A</td><td class="border border-gray-200 px-4 py-2">Task B</td><td class="border border-gray-200 px-4 py-2">Task C</td><td class="border border-gray-200 px-4 py-2">Task D</td><td class="border border-gray-200 px-4 py-2">Task E</td><td class="border border-gray-200 px-4 py-2">Task F</td><td class="border border-gray-200 px-4 py-2">Task G</td><td class="border border-gray-200 px-4 py-2">Task H</td><td class="border border-gray-200 px-4 py-2">Task I</td><td class="border border-gray-200 px-4 py-2">Task J</td>
+                        </tr>
+                        <tr data-month="Jan" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">2</td><td class="border border-gray-200 px-4 py-2">Week 1</td><td class="border border-gray-200 px-4 py-2">Thu</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">02/Jan/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Report</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Design</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Follow-up</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Call</td>
+                        </tr>
+                        <tr data-month="Jan" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">3</td><td class="border border-gray-200 px-4 py-2">Week 2</td><td class="border border-gray-200 px-4 py-2">Fri</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">03/Jan/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Audit</td><td class="border border-gray-200 px-4 py-2">Feedback</td><td class="border border-gray-200 px-4 py-2">Training</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Report</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td>
+                        </tr>
+                        <tr data-month="Jan" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">4</td><td class="border border-gray-200 px-4 py-2">Week 2</td><td class="border border-gray-200 px-4 py-2">Sat</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">04/Jan/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Code</td><td class="border border-gray-200 px-4 py-2">Deployment</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Scrum</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Call</td>
+                        </tr>
+
+                        <tr data-month="Feb" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">5</td><td class="border border-gray-200 px-4 py-2">Week 5</td><td class="border border-gray-200 px-4 py-2">Mon</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">05/Feb/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Task A</td><td class="border border-gray-200 px-4 py-2">Task B</td><td class="border border-gray-200 px-4 py-2">Task C</td><td class="border border-gray-200 px-4 py-2">Task D</td><td class="border border-gray-200 px-4 py-2">Task E</td><td class="border border-gray-200 px-4 py-2">Task F</td><td class="border border-gray-200 px-4 py-2">Task G</td><td class="border border-gray-200 px-4 py-2">Task H</td><td class="border border-gray-200 px-4 py-2">Task I</td><td class="border border-gray-200 px-4 py-2">Task J</td>
+                        </tr>
+                        <tr data-month="Feb" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">6</td><td class="border border-gray-200 px-4 py-2">Week 5</td><td class="border border-gray-200 px-4 py-2">Tue</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">06/Feb/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Doc Review</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Code</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Lunch</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Client Meet</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Deployment</td>
+                        </tr>
+                        <tr data-month="Feb" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">7</td><td class="border border-gray-200 px-4 py-2">Week 6</td><td class="border border-gray-200 px-4 py-2">Wed</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">07/Feb/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Design</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Update</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Follow-up</td><td class="border border-gray-200 px-4 py-2">Call</td>
+                        </tr>
+                        <tr data-month="Feb" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">8</td><td class="border border-gray-200 px-4 py-2">Week 6</td><td class="border border-gray-200 px-4 py-2">Thu</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">08/Feb/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Coding</td><td class="border border-gray-200 px-4 py-2">Deployment</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Documentation</td>
+                        </tr>
+
+                        <tr data-month="Mar" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">9</td><td class="border border-gray-200 px-4 py-2">Week 9</td><td class="border border-gray-200 px-4 py-2">Mon</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">03/Mar/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Client Call</td><td class="border border-gray-200 px-4 py-2">Docs</td><td class="border border-gray-200 px-4 py-2">Design</td><td class="border border-gray-200 px-4 py-2">Fixes</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Update</td><td class="border border-gray-200 px-4 py-2">Feedback</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td>
+                        </tr>
+                        <tr data-month="Mar" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">10</td><td class="border border-gray-200 px-4 py-2">Week 9</td><td class="border border-gray-200 px-4 py-2">Tue</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">04/Mar/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Scrum</td><td class="border border-gray-200 px-4 py-2">Build</td><td class="border border-gray-200 px-4 py-2">Deploy</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Demo</td><td class="border border-gray-200 px-4 py-2">Feedback</td><td class="border border-gray-200 px-4 py-2">Plan Next</td><td class="border border-gray-200 px-4 py-2">Team Meet</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Code Review</td>
+                        </tr>
+                        <tr data-month="Mar" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">11</td><td class="border border-gray-200 px-4 py-2">Week 10</td><td class="border border-gray-200 px-4 py-2">Wed</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">05/Mar/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Coding</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Update</td><td class="border border-gray-200 px-4 py-2">Plan</td><td class="border border-gray-200 px-4 py-2">Docs</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Feedback</td>
+                        </tr>
+                        <tr data-month="Mar" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">12</td><td class="border border-gray-200 px-4 py-2">Week 10</td><td class="border border-gray-200 px-4 py-2">Thu</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">06/Mar/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Design</td><td class="border border-gray-200 px-4 py-2">Code</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Call</td>
+                        </tr>
+
+                        <tr data-month="Apr" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">13</td><td class="border border-gray-200 px-4 py-2">Week 14</td><td class="border border-gray-200 px-4 py-2">Mon</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">07/Apr/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Code Review</td><td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Deployment</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Follow-up</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Client Call</td>
+                        </tr>
+                        <tr data-month="Apr" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">14</td><td class="border border-gray-200 px-4 py-2">Week 14</td><td class="border border-gray-200 px-4 py-2">Tue</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">08/Apr/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Design</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Plan</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Update</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Documentation</td>
+                        </tr>
+                        <tr data-month="Apr" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">15</td><td class="border border-gray-200 px-4 py-2">Week 15</td><td class="border border-gray-200 px-4 py-2">Wed</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">09/Apr/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Client Meet</td><td class="border border-gray-200 px-4 py-2">Plan</td><td class="border border-gray-200 px-4 py-2">Code</td><td class="border border-gray-200 px-4 py-2">Test</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Deploy</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Feedback</td>
+                        </tr>
+                        <tr data-month="Apr" class="hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <td class="border border-gray-200 px-4 py-2">16</td><td class="border border-gray-200 px-4 py-2">Week 15</td><td class="border border-gray-200 px-4 py-2">Thu</td><td class="border border-gray-200 px-4 py-2 whitespace-nowrap">10/Apr/2025</td>
+                            <td class="border border-gray-200 px-4 py-2">Planning</td><td class="border border-gray-200 px-4 py-2">Documentation</td><td class="border border-gray-200 px-4 py-2">Testing</td><td class="border border-gray-200 px-4 py-2">Call</td><td class="border border-gray-200 px-4 py-2">Meeting</td><td class="border border-gray-200 px-4 py-2">Email</td><td class="border border-gray-200 px-4 py-2">Wrap-up</td><td class="border border-gray-200 px-4 py-2">Review</td><td class="border border-gray-200 px-4 py-2">Update</td><td class="border border-gray-200 px-4 py-2">Client Call</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const monthFilter = document.getElementById('monthFilter');
+        monthFilter.addEventListener('change', function() {
+            const month = this.value;
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                if (month === 'all' || row.dataset.month === month) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
